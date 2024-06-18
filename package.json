@@ -1,0 +1,14 @@
+{
+  "name": "tarefa-22",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "author": "Kelvin Zussa",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.10.0"
+  }
+}
