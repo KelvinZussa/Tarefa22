@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Fix Cypress permissions
+        run: chmod +x ./node_modules/.bin/cypress
+
       - name: Install Cypress
         run: npx cypress install
 
@@ -33,4 +36,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-     
+          publish_dir: ./mochawesome-report
