@@ -4,11 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run"
+    "test": "npm run cy:run",
+    "start": "npx serverest",
+    "cy:run": "npx cypress run",
+    "cy:report": "npx mochawesome-merge ./mochawesome-report/mochawesome*.json   > mochawesome-report/merged-report.json",
+    "cy:run-ci": "start-server-and-test 'npm start' http://localhost:3000/api-doc 'npm run test'"
   },
   "author": "Kelvin Zussa",
   "license": "ISC",
   "dependencies": {
     "cypress": "^13.10.0"
+  },
+  "devDependencies": {
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "start-server-and-test": "^2.0.8"
   }
 }
