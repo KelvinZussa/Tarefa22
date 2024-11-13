@@ -1,0 +1,39 @@
+name: EBAC CI
+
+on:
+  push:
+    branches: [ci]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          
+      - name: Install dependencies
+        run: npm install
+
+      - name: Fix Cypress permissions
+        run: chmod +x ./node_modules/.bin/cypress
+
+      - name: Install Cypress
+        run: npx cypress install
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        continue-on-error: true
+        with:
+          install-command: npm install
+          browser: chrome
+
+      - name: Publish Report
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./mochawesome-report
